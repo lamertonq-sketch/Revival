@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revival</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            height: 100%;
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
+        }
+        body {
+            background: url("https://i.redd.it/wkljnos4g0t21.jpg") no-repeat center/cover fixed;
+        }
+        nav {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(8px);
+            z-index: 999;
+        }
+        nav .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        nav .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.8rem;
+        }
+        nav .nav-links a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: 600;
+            transition: opacity 0.2s ease;
+        }
+        nav .nav-links a:hover {
+            opacity: 0.8;
+        }
+        .discord-link, .cart-link {
+            display: flex;
+            align-items: center;
+            transition: opacity 0.2s ease;
+        }
+        .discord-link:hover, .cart-link:hover {
+            opacity: 0.8;
+        }
+        .discord-icon, .cart-icon {
+            width: 28px;
+            height: 28px;
+            fill: #fff;
+        }
+
+        section {
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+        #hero {
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: transparent;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.7);
+        }
+        #hero h1 {
+            font-size: 3.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        #hero p {
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin-bottom: 2.5rem;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+        .btn-hero {
+            padding: 0.9rem 2.2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .btn-leaderboards {
+            background: #ffffff;
+            color: #000;
+            border: none;
+        }
+        .btn-leaderboards:hover {
+            background: #e0e0e0;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+        .btn-servers {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .btn-servers:hover {
+            background: rgba(255, 255, 255, 0.22);
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Shop section */
+        #shop {
+            padding: 5rem 2rem;
+        }
+        #shop h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 3.5rem;
+        }
+        .shop-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .product {
+            background: rgba(0, 0, 0, 0.55);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            width: 320px;
+            min-height: 420px;
+            backdrop-filter: blur(12px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .product:hover {
+            transform: scale(1.12) translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+        }
+        .product img {
+            width: 100%;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+        }
+        .product h3 {
+            font-size: 1.9rem;
+            margin: 1rem 0 0.8rem;
+        }
+        .product p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+        /* Simple white star icon */
+        .star-icon {
+            width: 90px;
+            height: 90px;
+            fill: #fff;
+            margin: 0 auto 1.2rem;
+            display: block;
+        }
+        .nametag-logo {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(90deg, #ff00cc, #00ffcc, #ccff00, #ff00cc, #ff6600, #9900ff);
+            background-size: 500% 500%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rainbowPulse 6s ease-in-out infinite;
+            display: inline-block;
+            margin: 1rem 0 1.5rem;
+        }
+        @keyframes rainbowPulse {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .btn-buy {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: #ff3c6e;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.3rem;
+            transition: 0.25s ease;
+        }
+        .btn-buy:hover {
+            background: #e83263;
+            transform: scale(1.12);
+        }
+
+        /* Never-ending slideshow */
+        #slideshow {
+            padding: 5rem 0;
+            background: rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+        }
+        .slideshow-wrapper {
+            width: 100%;
+            overflow: hidden;
+        }
+        .slideshow-track {
+            display: flex;
+            gap: 3.5rem;
+            animation: infiniteScroll 100s linear infinite;
+            will-change: transform;
+            padding: 0 3rem;
+        }
+        .slideshow-track:hover {
+            animation-play-state: paused;
+        }
+        .slide {
+            flex: 0 0 auto;
+            width: 320px;
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 16px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+            transition: transform 0.35s ease;
+        }
+        .slide:hover {
+            transform: scale(1.1);
+        }
+        @keyframes infiniteScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 1.8rem;
+            text-align: center;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">Revival</div>
+        <div class="nav-links">
+            <a href="#hero">Home</a>
+            <a href="#shop">Shop</a>
+            <a href="#leaderboards">Leaderboards</a>
+            <a href="https://discord.gg/YOUR_INVITE_HERE" class="discord-link" target="_blank" rel="noopener noreferrer" title="Join our Discord">
+                <svg class="discord-icon" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13.545 2.907a13.2 13.2 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.2 12.2 0 0 0-3.658 0 8 8 0 0 0-.412-.833.05.05 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.04.04 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032q.003.022.021.037a13.3 13.3 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019q.463-.63.818-1.329a.05.05 0 0 0-.01-.059l-.018-.011a9 9 0 0 1-1.248-.595.05.05 0 0 1-.02-.066l.015-.019q.127-.095.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.05.05 0 0 1 .053.007q.121.1.248.195a.05.05 0 0 1-.004.085 8 8 0 0 1-1.249.594.05.05 0 0 0-.03.03.05.05 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.2 13.2 0 0 0 4.001-2.02.05.05 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.03.03 0 0 0-.02-.019m-8.198 7.307c-.789 0-1.438-.724-1.438-1.612s.637-1.613 1.438-1.613c.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612m5.316 0c-.788 0-1.438-.724-1.438-1.612s.637-1.613 1.438-1.613c.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612"/>
+                </svg>
+            </a>
+            <a href="#cart" class="cart-link" title="Cart">
+                <svg class="cart-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM17 18c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2zM7 13h10l3-8H5.82l-.9-2H1v2h2l3.6 7.59-1.35 2.44C4.52 15.37 5.48 17 7 17h12v-2H7c-.55 0-1-.45-1-1z"/>
+                </svg>
+            </a>
+        </div>
+    </nav>
+
+    <section id="hero">
+        <h1>Welcome to Revival</h1>
+        <p>Performance. PVP. Bases. Blackmarket.</p>
+        <div class="hero-buttons">
+            <a href="#servers" class="btn-hero btn-servers">Servers</a>
+            <a href="#leaderboards" class="btn-hero btn-leaderboards">Leaderboards</a>
+        </div>
+    </section>
+
+    <section id="shop">
+        <h2>Shop</h2>
+        <div class="shop-container">
+            <div class="product">
+                <!-- Simple white star SVG -->
+                <svg class="star-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                </svg>
+                <h3>Priority Ticket</h3>
+                <p>Skip the line, Lasts forever.</p>
+                <a href="#" class="btn-buy">Buy Now</a>
+            </div>
+            <div class="product">
+                <div class="nametag-logo">[Clan]</div>
+                <h3>Clan Colour</h3>
+                <p>Customize your clan colours and stand out.</p>
+                <a href="#" class="btn-buy">Buy Now</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="slideshow">
+        <div class="slideshow-wrapper">
+            <div class="slideshow-track">
+                <div class="slide" style="background-image: url('https://i.redd.it/chernarus-screenshots-v0-xn1jg3kdungg1.jpg?width=1920&format=pjpg&auto=webp&s=94e5e4772f4df6978199179d2efad0d7082f7c55');"></div>
+                <div class="slide" style="background-image: url('https://i.redd.it/chernarus-screenshots-v0-pbzqgwriungg1.jpg?width=1920&format=pjpg&auto=webp&s=340926bdb218b8132ff862c32faa628c4df64e37');"></div>
+                <div class="slide" style="background-image: url('https://external-preview.redd.it/2JKI51_D9m1v979QvgLmxu8118afPnLLa9_ZZn9Xsps.jpg?width=1080&crop=smart&auto=webp&s=6c750474bc0bcca254b6545cc48cdf7fd9949509');"></div>
+                <div class="slide" style="background-image: url('https://preview.redd.it/how-do-i-actually-do-the-marksman-achiement-v0-sddk2c413chg1.png?auto=webp&s=e108805775538bacc0185df337da50fbd4baca4e');"></div>
+                <div class="slide" style="background-image: url('https://i.redd.it/chernarus-screenshots-v0-xn1jg3kdungg1.jpg?width=1920&format=pjpg&auto=webp&s=94e5e4772f4df6978199179d2efad0d7082f7c55');"></div>
+                <div class="slide" style="background-image: url('https://i.redd.it/chernarus-screenshots-v0-pbzqgwriungg1.jpg?width=1920&format=pjpg&auto=webp&s=340926bdb218b8132ff862c32faa628c4df64e37');"></div>
+                <div class="slide" style="background-image: url('https://external-preview.redd.it/2JKI51_D9m1v979QvgLmxu8118afPnLLa9_ZZn9Xsps.jpg?width=1080&crop=smart&auto=webp&s=6c750474bc0bcca254b6545cc48cdf7fd9949509');"></div>
+                <div class="slide" style="background-image: url('https://preview.redd.it/how-do-i-actually-do-the-marksman-achiement-v0-sddk2c413chg1.png?auto=webp&s=e108805775538bacc0185df337da50fbd4baca4e');"></div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        © 2026 Revival • All Rights Reserved
+    </footer>
+</body>
+</html>

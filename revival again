@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revival</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { height: 100%; font-family: 'Poppins', sans-serif; color: #fff; overflow-x: hidden; }
+        body { background: url("https://i.redd.it/1slxyfuti69y.jpg") no-repeat center/cover fixed; }
+
+        nav {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: transparent;
+            z-index: 999;
+        }
+
+        .logo-img {
+            width: 80px;
+            height: auto;
+            display: block;
+            filter: brightness(0) invert(1) drop-shadow(0 2px 8px rgba(0,0,0,0.6));
+            opacity: 0.15;
+            filter: blur(10px);
+            will-change: opacity, filter, transform;
+            animation: quickFogReveal 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards 0.2s;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+        .logo:hover .logo-img { transform: scale(1.15); filter: brightness(0) invert(1) drop-shadow(0 4px 12px rgba(255,255,255,0.9)) brightness(1.1); }
+
+        nav .nav-links { display: flex; align-items: center; gap: 1.8rem; }
+        nav .nav-links a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: 600;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+            opacity: 0.15;
+            filter: blur(10px);
+            will-change: opacity, filter, transform;
+            animation: quickFogReveal 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        nav .nav-links a:nth-child(1) { animation-delay: 0.3s; }
+        nav .nav-links a:nth-child(2) { animation-delay: 0.4s; }
+        nav .nav-links a:nth-child(3) { animation-delay: 0.5s; }
+        nav .nav-links a:nth-child(4) { animation-delay: 0.6s; }
+
+        @keyframes quickFogReveal {
+            from { opacity: 0.15; filter: blur(10px); transform: translateY(8px); }
+            to   { opacity: 1;   filter: blur(0);   transform: translateY(0); }
+        }
+
+        .discord-link, .cart-link { display: flex; align-items: center; cursor: pointer; }
+        .discord-icon, .cart-icon { width: 28px; height: 28px; fill: #fff; filter: drop-shadow(0 1px 4px rgba(0,0,0,0.8)); opacity: 1; }
+
+        section { padding: 6rem 2rem; text-align: center; position: relative; z-index: 2; }
+        #hero { height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background: transparent; text-shadow: 0 2px 10px rgba(0,0,0,0.7); position: relative; }
+
+        #hero h1 { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 6.8rem; letter-spacing: 12px; margin-bottom: 0.3rem; color: #ffffff; text-transform: uppercase; opacity: 0.15; filter: blur(10px); will-change: opacity, filter, transform; animation: quickFogReveal 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards 0.4s; }
+        #hero p { font-size: 1.6rem; font-weight: 500; margin-bottom: 2.5rem; opacity: 0.15; filter: blur(10px); will-change: opacity, filter, transform; animation: quickFogReveal 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards 0.4s; text-shadow: 0 0 18px rgba(255,255,255,0.9),0 0 35px rgba(255,255,255,0.7),0 0 60px rgba(255,255,255,0.5),0 0 90px rgba(255,255,255,0.3); animation: quickFogReveal 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards 0.4s, glowPulse 5s ease-in-out infinite 2s; }
+        @keyframes glowPulse { 0%,100% { text-shadow: 0 0 18px rgba(255,255,255,0.9),0 0 35px rgba(255,255,255,0.7),0 0 60px rgba(255,255,255,0.5); } 50% { text-shadow: 0 0 30px rgba(255,255,255,1),0 0 60px rgba(255,255,255,0.9),0 0 100px rgba(255,255,255,0.6); } }
+
+        .hero-buttons { opacity: 0.15; filter: blur(10px); will-change: opacity, filter, transform; animation: quickFogReveal 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards 0.4s; }
+
+        .scroll-prompt { position: absolute; top: 85%; left: 50%; transform: translateX(-50%); font-family: 'Poppins', sans-serif; font-weight: 500; font-size: 1.3rem; color: rgba(255,255,255,0.7); text-shadow: 0 0 12px rgba(255,255,255,0.4); opacity: 0; pointer-events: none; text-align: center; line-height: 1.4; transition: opacity 0.8s ease; will-change: opacity; }
+        .scroll-prompt.visible { opacity: 1; }
+        .scroll-prompt .arrow { display: block; font-size: 1.8rem; margin-top: 0.2rem; }
+
+        .btn-hero { padding: 0.9rem 2.2rem; font-size: 1.1rem; font-weight: 600; text-decoration: none; border-radius: 50px; transition: all 0.3s ease; cursor: pointer; }
+        .btn-leaderboards { background: #ffffff; color: #000; border: none; }
+        .btn-leaderboards:hover { background: #e0e0e0; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.4); }
+        .btn-servers { background: rgba(255,255,255,0.12); color: #fff; border: 1px solid rgba(255,255,255,0.25); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+        .btn-servers:hover { background: rgba(255,255,255,0.22); border-color: rgba(255,255,255,0.4); transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+
+        .btn-buy { display: inline-block; padding: 1rem 2rem; font-weight: 700; font-size: 1.3rem; color: #ffffff; text-decoration: none; border: 3px solid rgba(255,255,255,0.9); border-radius: 50px; background: transparent; box-shadow: 0 0 12px rgba(255,255,255,0.6),0 0 25px rgba(255,255,255,0.4); transition: all 0.35s ease; backdrop-filter: blur(4px); cursor: pointer; }
+        .btn-buy:hover { box-shadow: 0 0 25px rgba(255,255,255,1),0 0 45px rgba(255,255,255,0.7),inset 0 0 12px rgba(255,255,255,0.3); transform: scale(1.08); border-color: rgba(255,255,255,1); }
+
+        #shop { padding: 5rem 2rem; opacity: 0; animation: fadeIn 3s ease-out forwards 1.8s; }
+        #shop h2 { font-size: 3rem; font-weight: 700; margin-bottom: 3.5rem; }
+        .shop-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 4rem; max-width: 1200px; margin: 0 auto; }
+        .product { background: rgba(0,0,0,0.55); border-radius: 20px; padding: 2.5rem 2rem; width: 320px; min-height: 420px; backdrop-filter: blur(12px); transition: all 0.4s cubic-bezier(0.175,0.885,0.32,1.275); text-align: center; display: flex; flex-direction: column; justify-content: space-between; border: 1px solid rgba(255,255,255,0.12); }
+        .product:hover { transform: scale(1.12) translateY(-15px); box-shadow: 0 20px 40px rgba(0,0,0,0.8); border-color: rgba(255,255,255,0.3); }
+        .star-icon { width: 90px; height: 90px; fill: #fff; margin: 0 auto 1.2rem; display: block; }
+        .nametag-logo { font-size: 3rem; font-weight: 900; background: linear-gradient(90deg,#ff00cc,#00ffcc,#ccff00,#ff00cc,#ff6600,#9900ff); background-size: 500% 500%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: rainbowPulse 6s ease-in-out infinite; display: inline-block; margin: 1rem 0 1.5rem; }
+        @keyframes rainbowPulse { 0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%} }
+
+        #slideshow { padding: 5rem 0; background: rgba(0,0,0,0.5); overflow: hidden; opacity: 0; animation: fadeIn 3s ease-out forwards 2.8s; }
+        .slideshow-wrapper { width: 100%; overflow: hidden; }
+        .slideshow-track { display: flex; gap: 3.5rem; animation: infiniteScroll 100s linear infinite; will-change: transform; padding: 0 3rem; }
+        .slideshow-track:hover { animation-play-state: paused; }
+        .slide { flex: 0 0 auto; width: 320px; height: 180px; background-size: cover; background-position: center; border-radius: 16px; box-shadow: 0 6px 20px rgba(0,0,0,0.6); transition: transform 0.35s ease; }
+        .slide:hover { transform: scale(1.1); }
+        @keyframes infiniteScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        footer { background: rgba(0,0,0,0.4); padding: 1.8rem; text-align: center; font-size: 1rem; opacity: 0; animation: fadeIn 3s ease-out forwards 3.2s; }
+        @keyframes fadeIn { to { opacity: 1; } }
+
+        /* Cart preview popup */
+        #cart-preview {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: 12px;
+            padding: 1.1rem 1.6rem;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            max-width: 320px;
+        }
+        #cart-preview.show { opacity: 1; transform: translateY(0); }
+        #cart-preview h4 { margin: 0 0 0.6rem; font-size: 1.15rem; }
+        #cart-preview .checkout-btn {
+            background: #635bff;
+            color: white;
+            border: none;
+            padding: 0.7rem 1.4rem;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 0.9rem;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        #cart-preview .checkout-btn:hover { background: #574aff; }
+
+        /* Cart modal - transparent background */
+        #cart-modal {
+            position: fixed;
+            inset: 0;
+            background: transparent;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+        #cart-modal.show { display: flex; }
+        .cart-content {
+            background: rgba(20,20,35,0.88);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255,255,255,0.14);
+            border-radius: 16px;
+            padding: 2.2rem;
+            max-width: 540px;
+            width: 92%;
+            color: white;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+        }
+        .cart-content h2 { margin-bottom: 1.6rem; text-align: center; }
+        .cart-item { display: flex; justify-content: space-between; margin-bottom: 1.1rem; padding-bottom: 0.9rem; border-bottom: 1px solid rgba(255,255,255,0.12); }
+        .cart-total { font-weight: 700; font-size: 1.35rem; margin: 1.6rem 0; text-align: right; }
+        .cart-buttons { display: flex; gap: 1.2rem; justify-content: center; }
+        .cart-btn { padding: 0.9rem 1.8rem; border-radius: 50px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+        .cart-btn.checkout { background: #635bff; color: white; border: none; }
+        .cart-btn.checkout:hover { background: #574aff; }
+        .cart-btn.close { background: transparent; border: 2px solid rgba(255,255,255,0.55); color: white; }
+        .cart-btn.close:hover { background: rgba(255,255,255,0.18); }
+
+        /* Auth overlay */
+        #auth-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.85);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 3000;
+        }
+        .auth-content {
+            background: rgba(30,30,45,0.96);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 16px;
+            padding: 2.5rem;
+            max-width: 460px;
+            width: 90%;
+            text-align: center;
+        }
+        .auth-content h3 { margin-bottom: 1.3rem; }
+        .auth-content input {
+            width: 100%;
+            padding: 0.9rem;
+            margin: 0.8rem 0;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.08);
+            color: white;
+            font-size: 1.05rem;
+        }
+        .auth-buttons { display: flex; gap: 1.2rem; justify-content: center; margin-top: 1.8rem; }
+        .auth-btn { padding: 0.9rem 1.8rem; border-radius: 50px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+        .auth-btn.confirm { background: #4caf50; color: white; border: none; }
+        .auth-btn.cancel { background: transparent; border: 2px solid rgba(255,255,255,0.5); color: white; }
+        .auth-btn:hover.confirm { background: #43a047; }
+        .auth-btn:hover.cancel { background: rgba(255,255,255,0.12); }
+
+        /* Invoice modal - transparent background */
+        #invoice-modal {
+            position: fixed;
+            inset: 0;
+            background: transparent;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 4000;
+        }
+        #invoice-modal.show { display: flex; }
+        .invoice-content {
+            background: rgba(20,20,35,0.92);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255,255,255,0.16);
+            border-radius: 16px;
+            padding: 2.6rem;
+            max-width: 540px;
+            width: 92%;
+            color: white;
+            text-align: center;
+            box-shadow: 0 20px 70px rgba(0,0,0,0.7);
+            position: relative;
+        }
+        .invoice-close {
+            position: absolute;
+            top: 16px;
+            left: 20px;
+            font-size: 1.8rem;
+            color: white;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+        .invoice-close:hover { opacity: 1; }
+        .invoice-header { margin-bottom: 1.8rem; }
+        .invoice-header h2 { margin-bottom: 0.5rem; }
+        .invoice-header p { opacity: 0.8; font-size: 0.95rem; }
+        .invoice-details { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 1.6rem; margin: 1.6rem 0; text-align: left; }
+        .invoice-row { display: flex; justify-content: space-between; margin: 0.7rem 0; }
+        .invoice-total { font-weight: 700; font-size: 1.4rem; margin-top: 1.4rem; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 1.2rem; text-align: right; }
+        .pay-now-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 2.2rem;
+            background: #635bff;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.15rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1.8rem;
+            transition: background 0.3s, transform 0.2s;
+        }
+        .pay-now-btn:hover { background: #574aff; transform: scale(1.04); }
+        .stripe-logo { height: 28px; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">
+            <img src="https://www.pngkey.com/png/full/66-666683_handprint-img-monochrome.png" alt="Revival Handprint Logo" class="logo-img">
+        </div>
+        <div class="nav-links">
+            <a href="#hero">Home</a>
+            <a href="#shop">Shop</a>
+            <a href="#about">About</a>
+            <a href="#leaderboards">Leaderboards</a>
+            <a href="https://discord.gg/Uy4jjGrf" class="discord-link" target="_blank" rel="noopener noreferrer" title="Join our Discord">
+                <svg class="discord-icon" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13.545 2.907a13.2 13.2 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.2 12.2 0 0 0-3.658 0 8 8 0 0 0-.412-.833.05.05 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.04.04 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032q.003.022.021.037a13.3 13.3 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019q.463-.63.818-1.329a.05.05 0 0 0-.01-.059l-.018-.011a9 9 0 0 1-1.248-.595.05.05 0 0 1-.02-.066l.015-.019q.127-.095.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.05.05 0 0 1 .053.007q.121.1.248.195a.05.05 0 0 1-.004.085 8 8 0 0 1-1.249.594.05.05 0 0 0-.03.03.05.05 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.2 13.2 0 0 0 4.001-2.02.05.05 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.03.03 0 0 0-.02-.019m-8.198 7.307c-.789 0-1.438-.724-1.438-1.612s.637-1.613 1.438-1.613c.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612m5.316 0c-.788 0-1.438-.724-1.438-1.612s.637-1.613 1.438-1.613c.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612"/>
+                </svg>
+            </a>
+            <a href="#" class="cart-link" id="cartIcon" title="Cart">
+                <svg class="cart-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM17 18c-1.1 0-1.99.9-1.99 2S.89 2 1.99 2 2-.9 2-2-.9-2-2-2zM7 13h10l3-8H5.82l-.9-2H1v2h2l3.6 7.59-1.35 2.44C4.52 15.37 5.48 17 7 17h12v-2H7c-.55 0-1-.45-1-1z"/>
+                </svg>
+            </a>
+        </div>
+    </nav>
+
+    <section id="hero">
+        <h1>REVIVAL</h1>
+        <p>Refining DayZ.</p>
+        <div class="hero-buttons">
+            <a href="#servers" class="btn-hero btn-servers">Servers</a>
+            <a href="#leaderboards" class="btn-hero btn-leaderboards">Leaderboards</a>
+        </div>
+
+        <div class="scroll-prompt" id="scrollPrompt">
+            Scroll for more
+            <span class="arrow">↓</span>
+        </div>
+    </section>
+
+    <section id="shop">
+        <h2>Shop</h2>
+        <div class="shop-container">
+            <div class="product">
+                <svg class="star-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                </svg>
+                <h3>Priority Ticket</h3>
+                <p>Adds VIP. Skips the line Lasts forever.</p>
+                <a href="#" class="btn-buy" data-item="Priority Ticket">Buy Now</a>
+            </div>
+            <div class="product">
+                <div class="nametag-logo">[Clan]</div>
+                <h3>Clan Colour</h3>
+                <p>Customize your clan colours and stand out.</p>
+                <a href="#" class="btn-buy" data-item="Clan Colour">Buy Now</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="slideshow">
+        <div class="slideshow-wrapper">
+            <div class="slideshow-track">
+                <div class="slide" style="background-image: url('https://i.redd.it/chernarus-screenshots-v0-xn1jg3kdungg1.jpg?width=1920&format=pjpg&auto=webp&s=94e5e4772f4df6978199179d2efad0d7082f7c55');"></div>
+                <div class="slide" style="background-image: url('https://i.redd.it/chernarus-screenshots-v0-pbzqgwriungg1.jpg?width=1920&format=pjpg&auto=webp&s=340926bdb218b8132ff862c32faa628c4df64e37');"></div>
+                <div class="slide" style="background-image: url('https://external-preview.redd.it/2JKI51_D9m1v979QvgLmxu8118afPnLLa9_ZZn9Xsps.jpg?width=1080&crop=smart&auto=webp&s=6c750474bc0bcca254b6545cc48cdf7fd9949509');"></div>
+                <div class="slide" style="background-image: url('https://preview.redd.it/how-do-i-actually-do-the-marksman-achiement-v0-sddk2c413chg1.png?auto=webp&s=e108805775538bacc0185df337da50fbd4baca4e');"></div>
+                <div class="slide" style="background-image: url('https://i.redd.it/chernarus-screenshots-v0-xn1jg3kdungg1.jpg?width=1920&format=pjpg&auto=webp&s=94e5e4772f4df6978199179d2efad0d7082f7c55');"></div>
+                <div class="slide" style="background-image: url('https://i.redd.it/chernarus-screenshots-v0-pbzqgwriungg1.jpg?width=1920&format=pjpg&auto=webp&s=340926bdb218b8132ff862c32faa628c4df64e37');"></div>
+                <div class="slide" style="background-image: url('https://external-preview.redd.it/2JKI51_D9m1v979QvgLmxu8118afPnLLa9_ZZn9Xsps.jpg?width=1080&crop=smart&auto=webp&s=6c750474bc0bcca254b6545cc48cdf7fd9949509');"></div>
+                <div class="slide" style="background-image: url('https://preview.redd.it/how-do-i-actually-do-the-marksman-achiement-v0-sddk2c413chg1.png?auto=webp&s=e108805775538bacc0185df337da50fbd4baca4e');"></div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        © 2026 Revival • All Rights Reserved
+    </footer>
+
+    <!-- Cart preview popup -->
+    <div id="cart-preview"></div>
+
+    <!-- Full cart modal -->
+    <div id="cart-modal">
+        <div class="cart-content">
+            <h2>Your Cart</h2>
+            <div id="cart-items"></div>
+            <div class="cart-total" id="cart-total">$0.00</div>
+            <div class="cart-buttons">
+                <button class="cart-btn checkout" id="checkoutBtn">Checkout</button>
+                <button class="cart-btn close" id="closeCartBtn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Auth overlay (Steam ID + email/password) -->
+    <div id="auth-overlay">
+        <div class="auth-content">
+            <h3>Complete your purchase</h3>
+            <p style="margin: 0.6rem 0 1.4rem; opacity: 0.8;">Enter Steam ID and account details</p>
+
+            <input type="text" id="steamid-input" placeholder="Steam ID (7656119...)" />
+            <input type="email" id="email-input" placeholder="Email address" />
+            <input type="password" id="password-input" placeholder="Password" />
+
+            <div class="auth-buttons">
+                <button class="auth-btn confirm" id="confirmAuth">Proceed to Payment</button>
+                <button class="auth-btn cancel" id="cancelAuth">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Invoice modal -->
+    <div id="invoice-modal">
+        <div class="invoice-content">
+            <span class="invoice-close" onclick="document.getElementById('invoice-modal').style.display='none'">×</span>
+            <div class="invoice-header">
+                <h2>Revival Purchase Invoice</h2>
+                <p>Thank you for your purchase!</p>
+                <p style="margin-top: 1rem; font-size: 0.95rem; opacity: 0.9; color: #ffeb3b;">
+                    *please screen shot this box and open discord ticket*
+                </p>
+            </div>
+            <div class="invoice-details" id="invoice-details"></div>
+            <div class="invoice-total" id="invoice-total"></div>
+
+            <button class="pay-now-btn" id="payNowBtn">
+                PAY NOW
+                <img class="stripe-logo" src="https://upload.wikimedia.org/wikipedia/commons/b/ba/Stripe_Logo%2C_revised_2016.svg" alt="Stripe">
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Cart state
+        let cart = [];
+
+        // Stored accounts & invoices (in-memory)
+        const accounts = {};
+        const invoices = [];
+
+        const cartPreview = document.getElementById('cart-preview');
+        const cartModal = document.getElementById('cart-modal');
+        const cartItemsContainer = document.getElementById('cart-items');
+        const cartTotalEl = document.getElementById('cart-total');
+        const authOverlay = document.getElementById('auth-overlay');
+        const invoiceModal = document.getElementById('invoice-modal');
+
+        const itemPrices = {
+            "Priority Ticket": 19.99,
+            "Clan Colour": 9.99
+        };
+
+        const checkoutLinks = {
+            "Priority Ticket": "https://buy.stripe.com/7sY14odRB0B9clXe6S9Zm01",
+            "Clan Colour": "https://buy.stripe.com/8x27sM9BlgA75XzaUG9Zm02"
+        };
+
+        let pendingInvoice = null;
+
+        function showCartPreview(itemName) {
+            const price = itemPrices[itemName] || 0;
+            cartPreview.innerHTML = `
+                <h4>Added to cart</h4>
+                <p>${itemName} - $${price.toFixed(2)}</p>
+                <button class="checkout-btn" onclick="openCart()">View Cart / Checkout</button>
+            `;
+            cartPreview.classList.add('show');
+            setTimeout(() => cartPreview.classList.remove('show'), 5000);
+        }
+
+        function openCart() {
+            updateCartDisplay();
+            cartModal.classList.add('show');
+        }
+
+        function closeCart() {
+            cartModal.classList.remove('show');
+        }
+
+        function updateCartDisplay() {
+            cartItemsContainer.innerHTML = '';
+            let total = 0;
+
+            cart.forEach(item => {
+                const price = itemPrices[item.name] || 0;
+                total += price * item.quantity;
+
+                const div = document.createElement('div');
+                div.className = 'cart-item';
+                div.innerHTML = `<span>${item.name} ×${item.quantity}</span><span>$${(price * item.quantity).toFixed(2)}</span>`;
+                cartItemsContainer.appendChild(div);
+            });
+
+            cartTotalEl.textContent = `Total: $${total.toFixed(2)}`;
+        }
+
+        // Buy → add to cart
+        document.querySelectorAll('.btn-buy').forEach(btn => {
+            btn.addEventListener('click', e => {
+                e.preventDefault();
+                const itemName = btn.dataset.item;
+                if (!itemName) return;
+
+                let entry = cart.find(i => i.name === itemName);
+                if (entry) entry.quantity++;
+                else cart.push({ name: itemName, quantity: 1 });
+
+                showCartPreview(itemName);
+            });
+        });
+
+        document.getElementById('cartIcon').addEventListener('click', e => {
+            e.preventDefault();
+            openCart();
+        });
+
+        document.getElementById('closeCartBtn').addEventListener('click', closeCart);
+        cartModal.addEventListener('click', e => { if (e.target === cartModal) closeCart(); });
+
+        document.getElementById('checkoutBtn').addEventListener('click', () => {
+            if (cart.length === 0) {
+                alert("Your cart is empty.");
+                return;
+            }
+            authOverlay.style.display = 'flex';
+            closeCart();
+        });
+
+        document.getElementById('confirmAuth').addEventListener('click', () => {
+            const steamId  = document.getElementById('steamid-input').value.trim();
+            const email    = document.getElementById('email-input').value.trim();
+            const password = document.getElementById('password-input').value.trim();
+
+            if (!steamId || !email || !password) {
+                alert("Please fill in all fields.");
+                return;
+            }
+
+            accounts[email] = { password, steamId };
+
+            const invoiceId = 'INV-' + Math.floor(100000 + Math.random() * 900000);
+            const now = new Date().toLocaleString('en-AU', { timeZone: 'Australia/Sydney' });
+            let total = 0;
+            let itemsList = [];
+
+            cart.forEach(item => {
+                const price = itemPrices[item.name] || 0;
+                total += price * item.quantity;
+                itemsList.push(`${item.name} ×${item.quantity} — $${(price * item.quantity).toFixed(2)}`);
+            });
+
+            const invoice = {
+                id: invoiceId,
+                date: now,
+                steamId,
+                email,
+                items: itemsList,
+                total: total.toFixed(2)
+            };
+
+            pendingInvoice = invoice;
+            invoices.push(invoice);
+
+            document.getElementById('invoice-details').innerHTML = `
+                <div class="invoice-row"><strong>Invoice #:</strong> ${invoiceId}</div>
+                <div class="invoice-row"><strong>Date:</strong> ${now} (Sydney time)</div>
+                <div class="invoice-row"><strong>Steam ID:</strong> ${steamId}</div>
+                <div class="invoice-row"><strong>Email:</strong> ${email}</div>
+                <div class="invoice-row"><strong>Items:</strong></div>
+                ${itemsList.map(i => `<div class="invoice-row" style="padding-left:1rem;">${i}</div>`).join('')}
+            `;
+            document.getElementById('invoice-total').textContent = `Total: $${invoice.total}`;
+
+            invoiceModal.style.display = 'flex';
+            authOverlay.style.display = 'none';
+
+            cart = [];
+        });
+
+        document.getElementById('cancelAuth').addEventListener('click', () => {
+            authOverlay.style.display = 'none';
+        });
+
+        document.getElementById('payNowBtn').addEventListener('click', () => {
+            if (!pendingInvoice) return;
+
+            const firstItemName = pendingInvoice.items[0]?.split(' ×')[0] || "Priority Ticket";
+            const link = checkoutLinks[firstItemName] || checkoutLinks["Priority Ticket"];
+
+            const url = `${link}?steamid=${encodeURIComponent(pendingInvoice.steamId)}&invoice=${encodeURIComponent(pendingInvoice.id)}`;
+            window.location.href = url;
+        });
+
+        invoiceModal.addEventListener('click', e => {
+            if (e.target === invoiceModal) invoiceModal.style.display = 'none';
+        });
+
+        const scrollPrompt = document.getElementById('scrollPrompt');
+        setTimeout(() => {
+            if (scrollPrompt) scrollPrompt.style.opacity = '1';
+        }, 1000);
+    </script>
+
+</body>
+</html>
